@@ -1,0 +1,18 @@
+// C++ code
+// =map(valor, deMenor, deMaior, paraMenor, paraMaior);
+void setup()
+{
+  pinMode(A0, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  float n = analogRead(A0);
+  Serial.println("essa e a leitura analogico: ");
+  Serial.println(n);
+  float t = n * (5.0/1023.0);
+  delay(1000); // Wait for 1000 millisecond(s)
+  Serial.println("essa e a tensao: ");
+  Serial.println(t);
+}
