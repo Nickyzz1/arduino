@@ -1,0 +1,24 @@
+#include "thermistor.h"
+#include "HardwareSerial.h"
+
+int sensorTemp = A1;
+
+THERMISTOR thermistor(sensorTemp,        // Analog pin
+                      10000,          // Nominal resistance at 25 ºC
+                      3950,           // thermistor's beta coefficient
+                      10000);         // Value of the series resistor
+
+uint16_t temp;
+
+void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int temp = thermistor.read();
+  Serial.println(temp);
+  
+  delay(1000);
+}
