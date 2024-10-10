@@ -1,0 +1,47 @@
+#include <Arduino.h>
+
+int x = A6; //PINO REFERENTE A LIGAÇÃO DO EIXO X
+int y = A7; 
+int key = 22; 
+
+void setup(){
+  pinMode(A2, INPUT);
+  pinMode(A3, INPUT);
+  pinMode (key, INPUT_PULLUP); //DEFINE A PORTA COMO ENTRADA / "_PULLUP" É PARA ATIVAR O RESISTOR INTERNO
+  //DO ARDUINO PARA GARANTIR QUE NÃO EXISTA FLUTUAÇÃO ENTRE 0 (LOW) E 1 (HIGH)
+  Serial.begin (9600); 
+}
+void loop(){
+
+    if( analogRead(x) < 512)
+    {
+      Serial.println("ESQUERDA");
+    }
+    else if(analogRead(key) == LOW) {
+      Serial.println("BOTAO PRESSIONADO");
+    }
+    else if(analogRead(x) > 512){
+      Serial.println("DIREITA");
+    }
+     else if(analogRead(y) > 1020)
+    {
+      Serial.println("PARA BAIXO");
+    }
+     else if(analogRead(y) == 0)
+    {
+      Serial.println("PARA CIMA");
+    }
+    else
+    {
+      Serial.println("PARADO");
+    }
+
+    Serial.print("x: ");
+    Serial.println(analogRead(x));
+    Serial.print("y: ");
+    Serial.println(analogRead(y));
+    Serial.print("key: ");
+    Serial.println(digitalRead(key));
+    
+    delay(1000); //INTERVALO DE 200 MILISSEGUNDOS
+}
