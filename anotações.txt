@@ -1,0 +1,8 @@
+https://portal.vidadesilicio.com.br/modulo-rf-433mhz-comunicacao-arduinos/
+alimentação 5v usb e 9 a 12v por plug --btx e rx
+monitor serial: pega os valores de tx e rx
+pinos pwm : pinos digitais que simulam sáida analog (8 bits - 0 -255)
+
+pinos s (utuilizam entradas analogicoas)
+pinos a  convertem entrada em digital tem 10 bits (0 a 1023)
+memória flash arduino: 32 kb ()
