@@ -1,4 +1,5 @@
 https://portal.vidadesilicio.com.br/modulo-rf-433mhz-comunicacao-arduinos/
+criver arduino: https://sparks.gogo.co.nz/ch340.html
 alimentação 5v usb e 9 a 12v por plug --btx e rx
 monitor serial: pega os valores de tx e rx
 pinos pwm : pinos digitais que simulam sáida analog (8 bits - 0 -255)
