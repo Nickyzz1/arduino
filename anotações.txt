@@ -1,12 +1,44 @@
 https://portal.vidadesilicio.com.br/modulo-rf-433mhz-comunicacao-arduinos/
-criver arduino: https://sparks.gogo.co.nz/ch340.html
+driver arduino: https://sparks.gogo.co.nz/ch340.html
 alimentação 5v usb e 9 a 12v por plug --btx e rx
 monitor serial: pega os valores de tx e rx
 pinos pwm : pinos digitais que simulam sáida analog (8 bits - 0 -255)
 
-pinos s (utuilizam entradas analogicoas)
-pinos a  convertem entrada em digital tem 10 bits (0 a 1023)
-memória flash arduino: 32 kb ()
+// pinos s (utuilizam entradas analogicoas) --nn existe
+
+=== RESUMO ===================================================
+
+BIT: UNIDADE ÚNICA DE INFORMAÇÃO, COMPORTA UM VALOR DE 0 OU 1
+BYTE: TEM 8 BITS OU SEJA COMPORTA 256 VALORES(0 - 255), 2^8
+
+Um byte pode ser:
+
+00000000 (0 em decimal)
+
+00000001 (1 em decimal)
+
+11111111 (255 em decimal)
+
+- PINOS DIGITAIS SÃO USADOS PARA GUARDAR 1 BIT DE INFORMAÇÃO, OU SEJA, LIGAR OU DESLIGAR ALGO. HIGH = 5V E LOW = 0V
+
+- PINOS ANALÓGICOS TEM UMA RESOLUÇÃO DE 10 BITS, OU SEJA, QUALQUER VALOR LIDO SERÁ CONVERTIDO EM UM VALOR DE 0 A 1023
+
+- SAÍDA ANALÓGICA PMW TEM 8 BITS DE RESOLUÇÃO
+
+- PMW: caso eu precisa de uma saída analógica: pinos PMW D3, D5, D6, D9, D10 e D11 (OS COM ~) --> RECEBEM ENTRADA ANALÓGICA E CONVERTEM PARA DIGITAL DE 0 A 255 --> SÓ USA ANALOG WRITE
+
+- Memória flash arduino: 32 kb ()
+
+=== COMO USAR ==
+
+SE FOSSE CONTROLAR O LED POR UM POTENCIOMETRO:
+
+Entrada analógica: Use pino A0 a A5 para ler o potenciômetro.
+Saída PWM: Use pino D3, D5, D6, D9, D10 ou D11 para controlar o brilho do LED via PWM.
+
+-------------------- NÃO CONSIDERAR -------------------
+- pinos A convertem entrada analógica em digital, tem 10 bits (podem ler de 0 a 1023) eles não conseguem gerar sinais analógicos de saída.
+------------------------------------------------------
 display de  7 segmentos
 escrever coisas em display()
 piscar leds
