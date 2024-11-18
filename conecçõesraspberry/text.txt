@@ -1,0 +1,4 @@
+TX do GPS → RX do Raspberry Pi (GPIO 15 ou pino 10 no Raspberry Pi)
+RX do GPS → TX do Raspberry Pi (GPIO 14 ou pino 8 no Raspberry Pi)
+VCC do GPS → 5V ou 3.3V (dependendo da voltagem do seu módulo GPS)
+GND do GPS → GND do Raspberry Pi

@@ -1,0 +1,66 @@
+#include <SoftwareSerial.h>
+#include <HardwareSerial.h>
+
+// Defina os pinos RX e TX para o GPS
+#define GPS_RX_PIN 4  // Pino RX do Arduino conectado ao TX do módulo GPS
+#define GPS_TX_PIN 3  // Pino TX do Arduino conectado ao RX do módulo GPS
+
+// Crie um objeto SoftwareSerial para ler e escrever no GPS
+SoftwareSerial ss(GPS_RX_PIN, GPS_TX_PIN);
+
+void setup() {
+  // Inicializa a comunicação serial com o computador e com o GPS
+  Serial.begin(9600);
+  ss.begin(9600);  // A taxa de transmissão do GPS é geralmente 9600 bps
+
+  Serial.println("Iniciando...");
+}
+
+void loop() {
+  while (ss.available() > 0) {
+    char c = ss.read();  // Lê um byte da entrada serial
+
+    // Se o caractere lido for o início de uma string NMEA válida
+    if (c == '$') {
+      String gpsData = "";
+      
+      // Lê a string NMEA até encontrar um final de linha
+      while (c != '\n') {
+        gpsData += c;
+        c = ss.read();
+      }
+      
+      // Verifica se a string contém dados de localização (exemplo: GPGGA)
+      if (gpsData.startsWith("$GPGGA")) {
+        String latitude = extractField(gpsData, 2);  // Extrai a latitude do campo 2
+        String longitude = extractField(gpsData, 4); // Extrai a longitude do campo 4
+        
+        Serial.print("Latitude: ");
+        Serial.println(latitude);
+        Serial.print("Longitude: ");
+        Serial.println(longitude);
+      }
+    }
+  }
+}
+
+// Função para extrair um campo específico de uma string NMEA
+String extractField(String data, int fieldIndex) {
+  int index1 = 0;
+  int index2 = 0;
+  int currentField = 0;
+  
+  while (currentField < fieldIndex) {
+    index1 = data.indexOf(',', index2);
+    if (index1 == -1) break;
+    index2 = index1 + 1;
+    currentField++;
+  }
+
+  index1 = data.indexOf(',', index2);
+  if (index1 == -1) {
+    return data.substring(index2);  // Retorna o valor até o final
+  } else {
+    return data.substring(index2, index1);  // Retorna o valor entre as vírgulas
+  }
+}
